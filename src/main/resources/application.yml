@@ -1,0 +1,44 @@
+server:
+  error:
+    include-message: always
+    include-binding-errors: always
+
+spring:
+  application:
+    name: project
+  profiles:
+    active: production
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  data:
+    jdbc:
+      repositories:
+        enabled: false
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    #        Drivers will vary based on the database used
+    #        com.mysql.cj.jdbc.Driver
+    #        org.mariadb.jdbc.Driver
+    password: ${DB_PASSWORD}
+    url: ${DB_URL}
+    #        jdbc:mysql://localhost:3306/filesystem
+    #        jdbc:mariadb://localhost:3306/filesystem
+    username: ${DB_USERNAME}
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+
+  config:
+    import: file:.env[.properties]
+
+security:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    expiration-time: ${JWT_EXPIRATION_TIME}
+
+file:
+  upload-dir: ${UPLOAD_DIR}
+
